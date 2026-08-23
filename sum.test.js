@@ -54,3 +54,24 @@ test("adding floating point numbers", () => {
   // expect(value).toBe(0.3);     This won't work because of rounding error
   expect(value).toBeCloseTo(0.3);
 });
+
+// String Matchers
+// You can check strings against regular expressions with toMatch:
+// يمكنك التحقق من السلاسل النصية باستحدام التعبيرات النمطية عن طريق دالة toMatch
+test("there is no I in team", () => {
+  expect("team").not.toMatch(/I/);
+});
+
+test('but there is a "nene" in MohamedIsCallednene', () => {
+  expect("MohamedIsCallednene").toMatch(/nene/);
+});
+
+// Arrays and iterables
+// You can check if an array or iterable contains a particular item using toContain:
+// يمكنك التحقق مما إذا كانت مصفوفة أو كائن قابل للتكرار يحتوي على عنصر معين باستخدام الدالة toContain:
+
+const shoppingList = ["Iphone", "Samsung", "Ipad", "Laptop"];
+test('the shopping list has "Ipad" on it', () => {
+  expect(shoppingList).toContain("Ipad");
+  expect(new Set(shoppingList)).toContain("Ipad");
+});
