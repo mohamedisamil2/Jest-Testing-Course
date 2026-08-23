@@ -1,8 +1,8 @@
-const sum = require("./sum.js");
+const { sum, InputInvalid } = require("./sum.js");
 
 // common matches
 
-test(`add 1+2 to equal 3`, () => {
+test("adds 1 + 2 to equal 3", () => {
   expect(sum(1, 2)).toBe(3);
 });
 
@@ -74,4 +74,11 @@ const shoppingList = ["Iphone", "Samsung", "Ipad", "Laptop"];
 test('the shopping list has "Ipad" on it', () => {
   expect(shoppingList).toContain("Ipad");
   expect(new Set(shoppingList)).toContain("Ipad");
+});
+
+// Exceptions
+test("throws on invalid input", () => {
+  expect(() => {
+    InputInvalid("hello"); // this is string
+  }).toThrow();
 });
