@@ -1,4 +1,4 @@
-const { sum, InputInvalid } = require("./sum.js");
+const { sum, InputInvalid, fetchData, fetchPromise } = require("./sum.js");
 
 // common matches
 
@@ -81,4 +81,46 @@ test("throws on invalid input", () => {
   expect(() => {
     InputInvalid("hello"); // this is string
   }).toThrow();
+});
+
+// Testing Asynchronous Code
+// 1- Callback done(function):
+test("the data is beanut butter", (done) => {
+  function callback(data) {
+    try {
+      expect(data).toBe("beanut butter");
+      done();
+    } catch (error) {
+      done(error);
+    }
+  }
+  fetchData(callback);
+});
+
+// 2- Promises (resolve and reject)
+// A- Resolves
+test("the data is peanut butter", () => {
+  return expect(fetchPromise()).resolves.toBe("peanut butter");
+});
+
+// A- Rejects
+// test('the fetch fails with an error', () => {
+//   return expect(fetchPromise()).rejects.toThrow('error')
+// })
+
+// 3- Async/Await
+// Ex1:
+test("the data is peanut butter", async () => {
+  const data = await fetchPromise();
+  expect(data).toBe("peanut butter");
+});
+
+// Ex2:
+test("the fetch fails with an error", async () => {
+  expect.assertions(1);
+  try {
+    await fetchPromise();
+  } catch (error) {
+    expect(error).toMatch("error");
+  }
 });
