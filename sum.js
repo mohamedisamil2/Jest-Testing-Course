@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 function sum(a, b) {
   return a + b;
 }
@@ -25,4 +27,25 @@ function fetchPromise() {
   });
 }
 
-module.exports = { sum, InputInvalid, fetchData, fetchPromise };
+// Mock Function
+function testMock(items, callback) {
+  for (const item of items) {
+    callback(item);
+  }
+}
+
+// Mocking Module
+class Users {
+  static all() {
+    return axios.get("/users.json").then((res) => res.data);
+  }
+}
+
+module.exports = {
+  sum,
+  InputInvalid,
+  fetchData,
+  fetchPromise,
+  testMock,
+  Users,
+};
